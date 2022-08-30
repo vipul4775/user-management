@@ -33,15 +33,17 @@ public class UserController {
 
     //GET - get all users
 
-    @GetMapping("/getallusers")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(this.userService.getAllUsers());
+    @GetMapping("/getallusers/")
+    public ResponseEntity<List<User>> getAllUsers(@RequestParam(value = "pageNumber",defaultValue = "0",
+            required = false) Integer pageNumber, @RequestParam(value = "pageSize",defaultValue = "2",
+            required = false) Integer pageSize) {
+        return ResponseEntity.ok(this.userService.getAllUsers(pageNumber,pageSize));
     }
 
 
     //GET - get user by id
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId}/")
     public ResponseEntity<User> getUserById(@PathVariable Integer userId) {
 
         return ResponseEntity.ok(this.userService.getUserById(userId));
@@ -49,9 +51,9 @@ public class UserController {
     }
 
 
-    //PUT - Update user status
+    //PUT - Update user active/inactive status
 
-    @PutMapping("/updateuser")
+    @PutMapping("/updateuser/")
     public ResponseEntity<?> updateStatus(@RequestParam Integer userId, @RequestParam boolean status) {
         boolean result = this.userService.updateStatus(userId, status);
         return new ResponseEntity(Map.of("message", "User Status Updated Successfully"), HttpStatus.OK);
@@ -61,7 +63,7 @@ public class UserController {
 
     //DELETE - delete a user by id;
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{userId}/")
 
     public ResponseEntity<?> deleteUserById(@PathVariable Integer userId) {
         userService.deleteUserById(userId);

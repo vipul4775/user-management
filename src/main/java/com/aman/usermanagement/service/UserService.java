@@ -13,7 +13,7 @@ public interface UserService {
 
     User getUserById(Integer userId);
 
-    List<User> getAllUsers();
+    List<User> getAllUsers(Integer pageNumber, Integer pageSize);
 
     //boolean updateStatus(Integer userId);
     User deleteUserById(Integer userId);
